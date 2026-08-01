@@ -1,0 +1,156 @@
+# Groningen allotment — machine-readable planting map
+# 13.12 m (x, east-west) x 15.24 m (y, south-north / NNE)
+# Coordinate origin: SW corner. x_m = metres east, y_m = metres toward NNE.
+# Edited via the interactive map tool.
+
+plot:
+  area_m2: 200
+  width_m: 13.12
+  length_m: 15.24
+  orientation: NNE
+
+beds:
+  - id: cover_crops
+    name: Cover crops
+    position: {x_m: 0, y_m: 0, w_m: 2.2, h_m: 4.9}
+    crops: [Crimson Clover, Buckwheat, Phacelia]
+    root_depth: shallow
+    water_need: low
+    mulched: false
+
+  - id: sfg_beds
+    name: SFG Beds
+    position: {x_m: 2.3, y_m: 0, w_m: 1.4, h_m: 4.9}
+    crops: [Tomato, Carrot, Lettuce, Beet]
+    root_depth: medium
+    water_need: medium
+    mulched: false
+
+  - id: vegetable_bed
+    name: Vegetable Bed
+    position: {x_m: 3.7, y_m: 0, w_m: 2.8, h_m: 4.1}
+    crops: ["Cabbage (Summer Red)", "Russian Red (kale)", Celeriac]
+    root_depth: medium
+    water_need: medium
+    mulched: false
+
+  - id: courgette
+    name: Courgette
+    position: {x_m: 0, y_m: 5.7, w_m: 3.6, h_m: 1.1}
+    crops: [Courgette]
+    root_depth: medium
+    water_need: high
+    mulched: false
+
+  - id: pond_herb_spiral
+    name: "Pond & Herb Spiral"
+    position: {x_m: 3.6, y_m: 6.1, w_m: 3.2, h_m: 3.6}
+    crops: [Valerian]
+    root_depth: medium
+    water_need: high
+    mulched: false
+
+  - id: apple_tree_guild
+    name: Apple Tree Guild
+    position: {x_m: 0, y_m: 6.9, w_m: 3.6, h_m: 8.4}
+    crops: [Apple tree, Apple tree, Apple tree, Apple tree, Sweet Potato, Sweet Potato, Amaranthus, "Zwarte van Toscana (kale)", Strawberry, Lavender]
+    root_depth: deep
+    water_need: medium
+    mulched: true
+    notes: "Per planner design. Drone photo (ground-truth date) shows this footprint under blue weed-suppressant tarp — guild not yet visually confirmed established on-site."
+
+  - id: three_sister_patch
+    name: "Three-Sister Patch"
+    position: {x_m: 3.7, y_m: 9.7, w_m: 3.8, h_m: 5.5}
+    crops: ["Beans (French) — Glass Gem corn", "Beans (French) — Tasty Sweet F1 corn", "Squash (Winter)", Courgette, Courgette]
+    root_depth: deep
+    water_need: high
+    mulched: false
+
+  - id: potatoes
+    name: Potatoes
+    position: {x_m: 6.6, y_m: 0, w_m: 2.2, h_m: 3.1}
+    crops: [Rhubarb]
+    root_depth: deep
+    water_need: medium
+    mulched: true
+
+  - id: grape_vine_redcurrant_bed
+    name: "Grape Vine & Redcurrant Bed"
+    position: {x_m: 8.8, y_m: 0, w_m: 4.3, h_m: 5.1}
+    crops: [Grape Vine, Redcurrant, Redcurrant]
+    root_depth: deep
+    water_need: medium
+    mulched: true
+
+  - id: asparagus
+    name: Asparagus
+    position: {x_m: 6.6, y_m: 3.2, w_m: 2.2, h_m: 0.9}
+    crops: [Asparagus]
+    root_depth: deep
+    water_need: medium
+    mulched: true
+
+  - id: tunnel_trellis
+    name: Tunnel trellis
+    position: {x_m: 3.8, y_m: 4.1, w_m: 5, h_m: 1.9}
+    crops: ["Cucumber (Marketmore)", "Cucumber (Hokus)", Basil, "Rondobella (tomato)", "Sweet Survivor (tomato)", "Mountain Magic (tomato)", "kittelbloem (nasturtium)"]
+    root_depth: medium
+    water_need: high
+    mulched: true
+
+  - id: north_strip
+    name: North Strip
+    position: {x_m: 11.9, y_m: 5.2, w_m: 1.3, h_m: 4.5}
+    crops: [Carrot]
+    root_depth: deep
+    water_need: medium
+    mulched: false
+
+  - id: brass_pepper
+    name: "Brass. & Pepper"
+    position: {x_m: 8.9, y_m: 9.7, w_m: 1.9, h_m: 3.7}
+    crops: ["Broccoli (Green)", "Broccoli (Green)", "Cauliflower (All The Year Round)"]
+    root_depth: medium
+    water_need: high
+    mulched: true
+
+  - id: tomatillo
+    name: Tomatillo
+    position: {x_m: 7.5, y_m: 9.7, w_m: 1.3, h_m: 5.5}
+    crops: [Tomatillo, Tomatillo, "Squash (Winter) — Familie Pompoen", Luffa]
+    root_depth: medium
+    water_need: high
+    mulched: false
+
+  - id: blueberry
+    name: Blueberry
+    position: {x_m: 8.9, y_m: 13.5, w_m: 4.3, h_m: 1.8}
+    crops: [Blueberry, "Blueberry (Emil)", Borage, Thyme, Strawberry]
+    root_depth: shallow
+    water_need: high
+    mulched: true
+
+  - id: dry_bean
+    name: Dry Bean
+    position: {x_m: 10.8, y_m: 9.7, w_m: 2.3, h_m: 3.7}
+    crops: [Wieringerboon, Canadian Wonder, Noordhollandse Bruine, Borlotto Rosso]
+    root_depth: medium
+    water_need: medium
+    mulched: false
+
+infrastructure:
+  - id: storage_shed
+    name: Storage Shed
+    position: {x_m: 8.8, y_m: 5.2, w_m: 3, h_m: 4.5}
+    source: both
+
+  - id: paved_patio_area
+    name: Paved Patio Area
+    position: {x_m: 6.9, y_m: 6.1, w_m: 1.9, h_m: 3.6}
+    source: both
+
+  - id: entrance_path
+    name: Entrance path
+    position: {x_m: 0, y_m: 4.9, w_m: 3.7, h_m: 0.8}
+    source: planner

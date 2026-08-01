@@ -1,0 +1,2 @@
+# Dependencies are added per block as the pipeline needs them.
+# Keep this list minimal — see CLAUDE.md hard rule: no new dependencies without asking.
