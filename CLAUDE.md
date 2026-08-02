@@ -46,7 +46,9 @@ water-need rules from the planting map), and threshold-based advice from
 the mock data, overwriting `docs/data/derived.json` and
 `docs/data/briefing.md` — no more hand-typed stubs. Advice phrasing uses
 `ANTHROPIC_API_KEY` when set, template fallback otherwise (untested here —
-no key in this environment). Verified in a headless browser: metric cards,
-bed-map stress colouring, advice card, and briefing tab all render the
-computed output with no console errors. Next: block 2.3 (water-balance
-chart) or 2.4 (flow animation).
+no key in this environment). Block 2.3 done: Trends tab renders a Chart.js
+line chart (CDN, pinned v4.4.4) from `derived.json.daily_series` — cumulative
+site ET vs site rain (deficit shaded) vs regional rain, with the widest
+site-vs-regional gap day marked as a point. Verified in a headless browser
+across all four tabs: no console errors. Next: block 2.4 (flow animation),
+the last Evening 2 block.

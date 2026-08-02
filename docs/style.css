@@ -243,6 +243,18 @@ main {
   background: var(--colour-bg);
 }
 
+.trends-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+}
+
+.trends-note {
+  margin: 1rem 0 0;
+  color: var(--colour-muted);
+  font-size: 0.9rem;
+}
+
 .briefing-footer {
   margin-top: 1.5rem;
   padding-top: 0.75rem;

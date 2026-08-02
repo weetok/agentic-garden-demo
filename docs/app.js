@@ -84,6 +84,93 @@ function renderAdvice(derived) {
   container.appendChild(why);
 }
 
+function cumulative(values) {
+  let running = 0;
+  return values.map((v) => (running += v));
+}
+
+function renderTrendsChart(derived) {
+  const series = derived.daily_series;
+  const labels = series.map((d) => d.date);
+  const cumEt = cumulative(series.map((d) => d.et_mm));
+  const cumSiteRain = cumulative(series.map((d) => d.rain_site_mm));
+  const cumRegionalRain = cumulative(series.map((d) => d.rain_regional_mm));
+
+  // Mark the day the site-vs-regional rain gap is widest — a single highlighted
+  // point on the shared x-axis, no chart plugin required.
+  let maxGapIndex = 0;
+  let maxGap = -Infinity;
+  cumSiteRain.forEach((v, i) => {
+    const gap = cumRegionalRain[i] - v;
+    if (gap > maxGap) {
+      maxGap = gap;
+      maxGapIndex = i;
+    }
+  });
+  const divergenceMarker = series.map((_, i) => (i === maxGapIndex ? cumSiteRain[i] : null));
+
+  new Chart(document.getElementById("trends-chart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Cumulative ET (mm)",
+          data: cumEt,
+          borderColor: "#d9534f",
+          backgroundColor: "rgba(217, 83, 79, 0.12)",
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.15,
+        },
+        {
+          label: "Cumulative site rain (mm)",
+          data: cumSiteRain,
+          borderColor: "#3f7d3f",
+          backgroundColor: "rgba(63, 125, 63, 0.15)",
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.15,
+          fill: 0,
+        },
+        {
+          label: "Cumulative regional rain (mm)",
+          data: cumRegionalRain,
+          borderColor: "#6b6b62",
+          borderDash: [5, 4],
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.15,
+          fill: false,
+        },
+        {
+          label: "Widest site-vs-regional gap",
+          data: divergenceMarker,
+          borderColor: "transparent",
+          backgroundColor: "#e8b64c",
+          pointRadius: 6,
+          pointHoverRadius: 7,
+          showLine: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        y: { title: { display: true, text: "mm, cumulative" } },
+      },
+      plugins: {
+        legend: { position: "bottom" },
+      },
+    },
+  });
+
+  document.getElementById("trends-note").textContent =
+    `Widest divergence on ${labels[maxGapIndex]}: ${maxGap.toFixed(1)} mm more fell regionally than on site, cumulative to that day. The shaded band is the site's water deficit (ET ahead of rainfall).`;
+}
+
 // Minimal parser for the briefing's fixed, constrained subset of markdown
 // (headings, bullets, one table, plain paragraphs, a footer line) — see
 // contracts/briefing.format.md rule 5. Not a general markdown renderer.
@@ -195,6 +282,7 @@ async function loadOverview() {
   renderMetrics(derived);
   renderBedMap(plantingMap, derived);
   renderAdvice(derived);
+  renderTrendsChart(derived);
 }
 
 loadOverview().catch((err) => console.error("Failed to load overview data:", err));

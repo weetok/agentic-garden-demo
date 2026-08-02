@@ -65,7 +65,13 @@
       </section>
 
       <section class="panel" id="panel-trends" role="tabpanel" aria-labelledby="tab-trends" hidden>
-        <p class="placeholder">Water-balance trend chart arrives in Evening 2 (block 2.3).</p>
+        <div class="panel-box" id="trends-card">
+          <h2>Water balance — cumulative ET vs rainfall</h2>
+          <div class="trends-chart-wrap">
+            <canvas id="trends-chart"></canvas>
+          </div>
+          <p class="trends-note" id="trends-note"></p>
+        </div>
       </section>
 
       <section class="panel" id="panel-flow" role="tabpanel" aria-labelledby="tab-flow" hidden>
@@ -77,6 +83,7 @@
       </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
