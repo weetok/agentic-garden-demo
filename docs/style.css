@@ -1,0 +1,131 @@
+:root {
+  --colour-bg: #f7f5f0;
+  --colour-surface: #ffffff;
+  --colour-border: #ddd8cc;
+  --colour-text: #2b2b26;
+  --colour-muted: #6b6b62;
+  --colour-primary: #3f7d3f;
+  --colour-primary-dark: #2c5a2c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--colour-bg);
+  color: var(--colour-text);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--colour-surface);
+  border-bottom: 1px solid var(--colour-border);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--colour-primary-dark);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab {
+  border: 1px solid transparent;
+  background: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  color: var(--colour-muted);
+  cursor: pointer;
+}
+
+.tab[aria-selected="true"] {
+  background: var(--colour-primary);
+  color: #fff;
+}
+
+main {
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--colour-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.metric-unit {
+  font-size: 0.8rem;
+  color: var(--colour-muted);
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-box {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.panel-box h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--colour-primary-dark);
+}
+
+.placeholder {
+  color: var(--colour-muted);
+  font-style: italic;
+}
