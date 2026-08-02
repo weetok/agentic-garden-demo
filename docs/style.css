@@ -199,3 +199,55 @@ main {
 #advice-content .advice-why li {
   margin-bottom: 0.25rem;
 }
+
+.briefing {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.briefing h1 {
+  font-size: 1.4rem;
+  color: var(--colour-primary-dark);
+  margin-top: 0;
+}
+
+.briefing h2 {
+  font-size: 1.05rem;
+  color: var(--colour-primary-dark);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.briefing p {
+  line-height: 1.5;
+}
+
+.briefing ul {
+  padding-left: 1.2rem;
+  line-height: 1.5;
+}
+
+.briefing table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.briefing th,
+.briefing td {
+  border: 1px solid var(--colour-border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.briefing th {
+  background: var(--colour-bg);
+}
+
+.briefing-footer {
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--colour-border);
+  color: var(--colour-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
