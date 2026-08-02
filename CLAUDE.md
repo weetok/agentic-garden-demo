@@ -49,6 +49,14 @@ the mock data, overwriting `docs/data/derived.json` and
 no key in this environment). Block 2.3 done: Trends tab renders a Chart.js
 line chart (CDN, pinned v4.4.4) from `derived.json.daily_series` — cumulative
 site ET vs site rain (deficit shaded) vs regional rain, with the widest
-site-vs-regional gap day marked as a point. Verified in a headless browser
-across all four tabs: no console errors. Next: block 2.4 (flow animation),
-the last Evening 2 block.
+site-vs-regional gap day marked as a point. Block 2.4 done: Flow tab is a
+static inline SVG (no JS — it's canned, not data-driven) showing the four
+mock sources (site sensors tagged LoRa · solar-powered, weather API,
+planting map, observations) through contracts → store → derived layer →
+dashboard/briefing, with honest-seam / demo-shortcut tags pulled from
+PLAN.md §3's own wording, and looping `animateMotion` pulses per connector.
+
+**Evening 2 complete** — all of blocks 2.1–2.4 done. Verified in a headless
+browser across all four tabs on every block: no console errors. Remaining
+per PLAN.md: §8 accompanying documentation (README, architecture diagrams)
+— not started.

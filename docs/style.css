@@ -255,6 +255,94 @@ main {
   font-size: 0.9rem;
 }
 
+.flow-svg-wrap {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.flow-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: inherit;
+}
+
+.flow-connector {
+  fill: none;
+  stroke: var(--colour-muted);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.flow-arrowhead {
+  fill: var(--colour-muted);
+  opacity: 0.6;
+}
+
+.flow-pulse {
+  fill: var(--colour-primary);
+}
+
+.flow-box rect {
+  stroke-width: 1.5;
+}
+
+.flow-box-source rect {
+  fill: var(--colour-surface);
+  stroke: var(--colour-border);
+}
+
+.flow-box-contract rect,
+.flow-box-derived rect {
+  fill: #eaf3ea;
+  stroke: var(--colour-primary);
+}
+
+.flow-box-store rect {
+  fill: #fbf3e2;
+  stroke: var(--colour-stress-watch);
+}
+
+.flow-box-surface rect {
+  fill: var(--colour-surface);
+  stroke: var(--colour-primary-dark);
+}
+
+.flow-title {
+  text-anchor: middle;
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--colour-text);
+}
+
+.flow-subtitle {
+  text-anchor: middle;
+  font-size: 11px;
+  fill: var(--colour-muted);
+}
+
+.flow-badge {
+  text-anchor: middle;
+  font-size: 10px;
+  font-style: italic;
+  fill: var(--colour-primary-dark);
+}
+
+.flow-tag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-anchor: end;
+}
+
+.flow-tag-honest {
+  fill: var(--colour-primary);
+}
+
+.flow-tag-shortcut {
+  fill: #b8860b;
+}
+
 .briefing-footer {
   margin-top: 1.5rem;
   padding-top: 0.75rem;
