@@ -6,6 +6,10 @@
   --colour-muted: #6b6b62;
   --colour-primary: #3f7d3f;
   --colour-primary-dark: #2c5a2c;
+  --colour-stress-ok: #8fbf6f;
+  --colour-stress-watch: #e8b64c;
+  --colour-stress-act: #d9534f;
+  --colour-infra: #cfcac0;
 }
 
 * {
@@ -128,4 +132,70 @@ main {
 .placeholder {
   color: var(--colour-muted);
   font-style: italic;
+}
+
+.bed-map-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bed-map-bed {
+  stroke: var(--colour-text);
+  stroke-width: 0.05;
+}
+
+.bed-map-infra {
+  fill: var(--colour-infra);
+  stroke: var(--colour-border);
+  stroke-width: 0.05;
+}
+
+.bed-map-legend {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--colour-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.15rem;
+}
+
+.legend-ok {
+  background: var(--colour-stress-ok);
+}
+
+.legend-watch {
+  background: var(--colour-stress-watch);
+}
+
+.legend-act {
+  background: var(--colour-stress-act);
+}
+
+#advice-content .advice-headline {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+#advice-content .advice-why {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--colour-muted);
+  font-size: 0.9rem;
+}
+
+#advice-content .advice-why li {
+  margin-bottom: 0.25rem;
 }

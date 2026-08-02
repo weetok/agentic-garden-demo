@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-01T20:00:00Z",
+  "period": { "start": "2026-07-25", "end": "2026-07-31" },
+
+  "headline_metrics": {
+    "temperature_c": 29.4,
+    "humidity_pct": 38,
+    "wind_speed_ms": 4.2,
+    "rain_7d_mm": 2.0,
+    "et_7d_mm": 27.3
+  },
+
+  "daily_series": [
+    { "date": "2026-07-25", "et_mm": 2.8, "rain_site_mm": 0.5, "rain_regional_mm": 1.0 },
+    { "date": "2026-07-26", "et_mm": 3.0, "rain_site_mm": 0.0, "rain_regional_mm": 1.5 },
+    { "date": "2026-07-27", "et_mm": 3.2, "rain_site_mm": 0.0, "rain_regional_mm": 2.0 },
+    { "date": "2026-07-28", "et_mm": 4.1, "rain_site_mm": 0.0, "rain_regional_mm": 2.0 },
+    { "date": "2026-07-29", "et_mm": 4.5, "rain_site_mm": 1.5, "rain_regional_mm": 2.0 },
+    { "date": "2026-07-30", "et_mm": 4.8, "rain_site_mm": 0.0, "rain_regional_mm": 1.0 },
+    { "date": "2026-07-31", "et_mm": 4.9, "rain_site_mm": 0.0, "rain_regional_mm": 0.5 }
+  ],
+
+  "outlook": {
+    "period": { "start": "2026-08-01", "end": "2026-08-07" },
+    "source": "regional_forecast",
+    "forecast_rain_mm": 4.0,
+    "forecast_et_mm": 28.0,
+    "drivers": [
+      "Based on regional forecast — site typically runs drier",
+      "High pressure holding, ET demand expected to stay elevated"
+    ]
+  },
+
+  "beds": [
+    { "bed_id": "cover_crops", "stress": "ok", "water_balance_mm": -2.0 },
+    { "bed_id": "sfg_beds", "stress": "act", "water_balance_mm": -18.0 },
+    { "bed_id": "vegetable_bed", "stress": "watch", "water_balance_mm": -9.0 },
+    { "bed_id": "courgette", "stress": "act", "water_balance_mm": -15.0 },
+    { "bed_id": "pond_herb_spiral", "stress": "watch", "water_balance_mm": -8.0 },
+    { "bed_id": "apple_tree_guild", "stress": "ok", "water_balance_mm": 4.0 },
+    { "bed_id": "three_sister_patch", "stress": "watch", "water_balance_mm": -7.0 },
+    { "bed_id": "potatoes", "stress": "ok", "water_balance_mm": 2.0 },
+    { "bed_id": "grape_vine_redcurrant_bed", "stress": "ok", "water_balance_mm": 3.0 },
+    { "bed_id": "asparagus", "stress": "ok", "water_balance_mm": 1.0 },
+    { "bed_id": "tunnel_trellis", "stress": "watch", "water_balance_mm": -6.0 },
+    { "bed_id": "north_strip", "stress": "ok", "water_balance_mm": 0.0 },
+    { "bed_id": "brass_pepper", "stress": "watch", "water_balance_mm": -5.0 },
+    { "bed_id": "tomatillo", "stress": "act", "water_balance_mm": -14.0 },
+    { "bed_id": "blueberry", "stress": "watch", "water_balance_mm": -6.0 },
+    { "bed_id": "dry_bean", "stress": "ok", "water_balance_mm": -1.0 }
+  ],
+
+  "advice": {
+    "headline": "Deep-water the square-foot beds tonight, then mulch. Leave the apple guild alone.",
+    "actions": [
+      { "bed_id": "sfg_beds", "action": "deep_water_and_mulch" },
+      { "bed_id": "courgette", "action": "deep_water" },
+      { "bed_id": "tomatillo", "action": "deep_water" },
+      { "bed_id": "apple_tree_guild", "action": "none" }
+    ],
+    "why": [
+      "Site rain 2 mm vs 10 mm regional forecast this week",
+      "ET 27.3 mm outpaced rainfall over the same 7 days",
+      "Square-foot beds: shallow-rooted, unmulched — highest deficit",
+      "Courgette and tomatillo: high water need, unmulched",
+      "Apple guild: deep-rooted, mulched — buffered against the deficit"
+    ]
+  }
+}
