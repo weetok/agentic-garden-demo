@@ -2,22 +2,16 @@
 
 ## This week
 
-Over 25 July 2026–31 July 2026, the site logged 2.0 mm of rain against 10.0 mm recorded regionally over the same days — the site ran markedly drier than the surrounding area. Evapotranspiration reached 33.3 mm over the same seven days, outpacing rainfall as heat and wind pushed water demand up. Across the full three-week record (week 1 14.2 mm short, week 2 28.8 mm short, week 3 31.3 mm short), the deficit widened week on week to this week's shortfall.
+Over 25 July 2026–31 July 2026, the site logged 2.0 mm of rain against 10.0 mm recorded regionally over the same days — the site ran markedly drier than the surrounding area. ET reached 33.3 mm over the same seven days, outpacing rainfall as heat and wind pushed water demand up. Across the full three-week record (week 1 14.2 mm short, week 2 28.8 mm short, week 3 31.3 mm short), the deficit widened week on week to this week's shortfall.
 
 ## Outlook
 
-The week ahead (1 August 2026–7 August 2026) is forecast — via the regional weather service, not site sensors — to bring 4.0 mm of rain against 28.7 mm of estimated evapotranspiration. Given the site has run drier than the region this period, actual conditions may be drier still.
+The week ahead (1 August 2026–7 August 2026) is forecast — via the regional weather service, not site sensors — to bring 4.0 mm of rain against 28.7 mm of estimated ET. Given the site has run drier than the region this period, actual conditions may be drier still.
 
 ## Advice
 
-Deep-water Courgette, Pond & Herb Spiral, Tomatillo and 7 other beds tonight, then mulch where unmulched. Leave Apple Tree Guild alone.
+Deep-water Cover crops, SFG Beds, Vegetable Bed and 1 other bed tonight, then mulch where unmulched. Leave Apple Tree Guild alone.
 
-- Courgette: deep-water, then mulch
-- Pond & Herb Spiral: deep-water, then mulch
-- Tomatillo: deep-water, then mulch
-- Blueberry: deep-water
-- Tunnel trellis: deep-water
-- Brass. & Pepper: deep-water
 - Cover crops: deep-water, then mulch
 - SFG Beds: deep-water, then mulch
 - Vegetable Bed: deep-water, then mulch
@@ -28,10 +22,11 @@ Deep-water Courgette, Pond & Herb Spiral, Tomatillo and 7 other beds tonight, th
 
 - Site rain 2.0 mm vs 10.0 mm recorded regionally over the same 7 days
 - ET 33.3 mm outpaced rainfall over the same period
-- Courgette: high water need, unmulched, medium-rooted
-- Pond & Herb Spiral: high water need, unmulched, medium-rooted
-- Tomatillo: high water need, unmulched, medium-rooted
-- 7 further beds also flagged for watering — see actions
+- Plus 81.0 mm applied via manual watering across 6 beds this week
+- Cover crops: low water need, unmulched, shallow-rooted
+- SFG Beds: medium water need, unmulched, medium-rooted
+- Vegetable Bed: medium water need, unmulched, medium-rooted
+- 1 further bed also flagged for watering — see actions
 - Apple Tree Guild: deep-rooted, mulched — buffered against the deficit
 
 ## Numbers

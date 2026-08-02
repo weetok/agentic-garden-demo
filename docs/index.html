@@ -10,15 +10,56 @@
     <header class="site-header">
       <h1>Agentic Garden</h1>
       <nav class="tabs" role="tablist" aria-label="Dashboard views">
-        <button class="tab" role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" data-tab="overview">Overview</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-trends" id="tab-trends" data-tab="trends">Trends</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-flow" id="tab-flow" data-tab="flow">Flow</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-briefing" id="tab-briefing" data-tab="briefing">Briefing</button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-overview"
+          id="tab-overview"
+          data-tab="overview"
+        >
+          Overview
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-trends"
+          id="tab-trends"
+          data-tab="trends"
+        >
+          Trends
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-flow"
+          id="tab-flow"
+          data-tab="flow"
+        >
+          Flow
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-briefing"
+          id="tab-briefing"
+          data-tab="briefing"
+        >
+          Briefing
+        </button>
       </nav>
     </header>
 
     <main>
-      <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <section
+        class="panel"
+        id="panel-overview"
+        role="tabpanel"
+        aria-labelledby="tab-overview"
+      >
         <div class="metric-cards" id="metric-cards">
           <div class="metric-card">
             <span class="metric-label">Temperature</span>
@@ -41,7 +82,7 @@
             <span class="metric-unit">mm</span>
           </div>
           <div class="metric-card">
-            <span class="metric-label">ET (7d)</span>
+            <span class="metric-label">Evapotranspiration (ET), 7d</span>
             <span class="metric-value" data-metric="et_7d_mm">–</span>
             <span class="metric-unit">mm</span>
           </div>
@@ -52,10 +93,21 @@
             <h2>Bed map</h2>
             <div id="bed-map-svg" class="bed-map-svg-wrap"></div>
             <div class="bed-map-legend">
-              <span class="legend-item"><span class="legend-swatch legend-ok"></span>OK</span>
-              <span class="legend-item"><span class="legend-swatch legend-watch"></span>Watch</span>
-              <span class="legend-item"><span class="legend-swatch legend-act"></span>Act now</span>
+              <span class="legend-item"
+                ><span class="legend-swatch legend-ok"></span>OK</span
+              >
+              <span class="legend-item"
+                ><span class="legend-swatch legend-watch"></span>Watch</span
+              >
+              <span class="legend-item"
+                ><span class="legend-swatch legend-act"></span>Act now</span
+              >
+              <span class="legend-item"
+                ><span class="legend-swatch legend-infra"></span
+                >Infrastructure</span
+              >
             </div>
+            <ol class="bed-map-key" id="bed-map-key"></ol>
           </div>
           <div class="panel-box" id="advice-card">
             <h2>Advice</h2>
@@ -64,117 +116,395 @@
         </div>
       </section>
 
-      <section class="panel" id="panel-trends" role="tabpanel" aria-labelledby="tab-trends" hidden>
+      <section
+        class="panel"
+        id="panel-trends"
+        role="tabpanel"
+        aria-labelledby="tab-trends"
+        hidden
+      >
         <div class="panel-box" id="trends-card">
-          <h2>Water balance — cumulative ET vs rainfall</h2>
+          <h2>
+            Water balance — cumulative evapotranspiration (ET) vs rainfall
+          </h2>
           <div class="trends-chart-wrap">
-            <canvas id="trends-chart"></canvas>
+            <canvas
+              id="trends-chart"
+              role="img"
+              aria-label="Cumulative ET versus site and regional rainfall over the three-week period"
+            ></canvas>
           </div>
           <p class="trends-note" id="trends-note"></p>
         </div>
+
+        <div class="panel-box" id="bed-balance-card">
+          <h2>Per-bed water balance</h2>
+          <div class="trends-chart-wrap trends-chart-wrap-tall">
+            <canvas
+              id="bed-balance-chart"
+              role="img"
+              aria-label="Water balance in millimetres for every bed, coloured by stress level"
+            ></canvas>
+          </div>
+          <p class="trends-note">
+            Every bed's current balance, worst first — the numeric companion to
+            the bed map.
+          </p>
+        </div>
+
+        <div class="panel-box" id="hourly-card">
+          <h2>Hourly conditions — trailing 7 days</h2>
+          <div class="hourly-grid">
+            <div class="hourly-chart-box">
+              <h3>Temperature (°C)</h3>
+              <div class="hourly-chart-wrap">
+                <canvas
+                  id="hourly-temp-chart"
+                  role="img"
+                  aria-label="Hourly temperature over the trailing seven days"
+                ></canvas>
+              </div>
+            </div>
+            <div class="hourly-chart-box">
+              <h3>Humidity (%)</h3>
+              <div class="hourly-chart-wrap">
+                <canvas
+                  id="hourly-humidity-chart"
+                  role="img"
+                  aria-label="Hourly humidity over the trailing seven days"
+                ></canvas>
+              </div>
+            </div>
+            <div class="hourly-chart-box">
+              <h3>Wind speed (m/s)</h3>
+              <div class="hourly-chart-wrap">
+                <canvas
+                  id="hourly-wind-chart"
+                  role="img"
+                  aria-label="Hourly wind speed over the trailing seven days"
+                ></canvas>
+              </div>
+            </div>
+            <div class="hourly-chart-box">
+              <h3>Rain (mm)</h3>
+              <div class="hourly-chart-wrap">
+                <canvas
+                  id="hourly-rain-chart"
+                  role="img"
+                  aria-label="Hourly rainfall over the trailing seven days"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section class="panel" id="panel-flow" role="tabpanel" aria-labelledby="tab-flow" hidden>
+      <section
+        class="panel"
+        id="panel-flow"
+        role="tabpanel"
+        aria-labelledby="tab-flow"
+        hidden
+      >
         <div class="panel-box" id="flow-card">
           <h2>Data flow</h2>
-          <p class="trends-note">Canned pulses along the real pipeline shape — not a live feed. See PLAN.md §3 for the target architecture this shortcuts from.</p>
+          <p class="trends-note">
+            Canned pulses along the real pipeline shape — not a live feed. Each
+            stage is tagged "honest seam" or "demo shortcut", showing where this
+            build matches its target production architecture and where it
+            deliberately cuts a corner for the demo.
+          </p>
           <div class="flow-svg-wrap">
-            <svg viewBox="0 0 1140 460" role="img" aria-label="Pipeline: four mock sources, through contracts, store, and the derived layer, to the dashboard and briefing surfaces">
+            <svg
+              viewBox="0 0 1140 460"
+              role="img"
+              aria-label="Pipeline: four mock sources, through contracts, store, and the derived layer, to the dashboard and briefing surfaces"
+            >
               <defs>
-                <marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <marker
+                  id="flow-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto-start-reverse"
+                >
                   <path d="M0,0 L10,5 L0,10 z" class="flow-arrowhead" />
                 </marker>
               </defs>
 
               <!-- connectors (also serve as animateMotion guides) -->
-              <path id="p-s1" class="flow-connector" marker-end="url(#flow-arrow)" d="M220,55 C245,55 245,190 270,190" />
-              <path id="p-s2" class="flow-connector" marker-end="url(#flow-arrow)" d="M220,145 C245,145 245,190 270,190" />
-              <path id="p-s3" class="flow-connector" marker-end="url(#flow-arrow)" d="M220,235 C245,235 245,190 270,190" />
-              <path id="p-s4" class="flow-connector" marker-end="url(#flow-arrow)" d="M220,325 C245,325 245,190 270,190" />
-              <path id="p-cs" class="flow-connector" marker-end="url(#flow-arrow)" d="M420,190 L470,190" />
-              <path id="p-sd" class="flow-connector" marker-end="url(#flow-arrow)" d="M620,190 L670,190" />
-              <path id="p-dd" class="flow-connector" marker-end="url(#flow-arrow)" d="M820,190 C845,190 845,120 870,120" />
-              <path id="p-db" class="flow-connector" marker-end="url(#flow-arrow)" d="M820,190 C845,190 845,290 870,290" />
+              <path
+                id="p-s1"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M220,55 C245,55 245,190 270,190"
+              />
+              <path
+                id="p-s2"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M220,145 C245,145 245,190 270,190"
+              />
+              <path
+                id="p-s3"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M220,235 C245,235 245,190 270,190"
+              />
+              <path
+                id="p-s4"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M220,325 C245,325 245,190 270,190"
+              />
+              <path
+                id="p-cs"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M420,190 L470,190"
+              />
+              <path
+                id="p-sd"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M620,190 L670,190"
+              />
+              <path
+                id="p-dd"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M820,190 C845,190 845,120 870,120"
+              />
+              <path
+                id="p-db"
+                class="flow-connector"
+                marker-end="url(#flow-arrow)"
+                d="M820,190 C845,190 845,290 870,290"
+              />
 
               <!-- pulses: canned, looping, staggered. opacity starts at 0 and
                    freezes to 1 the instant each one's motion begins, so it
                    isn't visible sitting at the SVG origin during its stagger delay -->
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="0s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="2.6s" repeatCount="indefinite" begin="0s"><mpath href="#p-s1" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="0.5s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="2.6s" repeatCount="indefinite" begin="0.5s"><mpath href="#p-s2" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="1.0s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="2.6s" repeatCount="indefinite" begin="1.0s"><mpath href="#p-s3" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="1.5s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="2.6s" repeatCount="indefinite" begin="1.5s"><mpath href="#p-s4" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="1.8s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="1.4s" repeatCount="indefinite" begin="1.8s"><mpath href="#p-cs" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="2.2s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="1.4s" repeatCount="indefinite" begin="2.2s"><mpath href="#p-sd" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="2.6s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="1.8s" repeatCount="indefinite" begin="2.6s"><mpath href="#p-dd" /></animateMotion></circle>
-              <circle r="5" class="flow-pulse" opacity="0"><animate attributeName="opacity" begin="2.6s" dur="0.01s" values="0;1" fill="freeze" /><animateMotion dur="1.8s" repeatCount="indefinite" begin="2.6s"><mpath href="#p-db" /></animateMotion></circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="0s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="2.6s" repeatCount="indefinite" begin="0s">
+                  <mpath href="#p-s1" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="0.5s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="2.6s" repeatCount="indefinite" begin="0.5s">
+                  <mpath href="#p-s2" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="1.0s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.0s">
+                  <mpath href="#p-s3" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="1.5s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.5s">
+                  <mpath href="#p-s4" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="1.8s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="1.4s" repeatCount="indefinite" begin="1.8s">
+                  <mpath href="#p-cs" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="2.2s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="1.4s" repeatCount="indefinite" begin="2.2s">
+                  <mpath href="#p-sd" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="2.6s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="1.8s" repeatCount="indefinite" begin="2.6s">
+                  <mpath href="#p-dd" />
+                </animateMotion>
+              </circle>
+              <circle r="5" class="flow-pulse" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  begin="2.6s"
+                  dur="0.01s"
+                  values="0;1"
+                  fill="freeze"
+                />
+                <animateMotion dur="1.8s" repeatCount="indefinite" begin="2.6s">
+                  <mpath href="#p-db" />
+                </animateMotion>
+              </circle>
 
               <!-- sources -->
               <g class="flow-box flow-box-source">
                 <rect x="20" y="20" width="200" height="70" rx="6" />
                 <text x="120" y="45" class="flow-title">Site sensors</text>
-                <text x="120" y="61" class="flow-subtitle">rain · wind · humidity · temp</text>
-                <text x="120" y="77" class="flow-badge">LoRa · solar-powered</text>
+                <text x="120" y="61" class="flow-subtitle">
+                  rain · wind · humidity · temp
+                </text>
+                <text x="120" y="77" class="flow-badge">
+                  LoRa · solar-powered
+                </text>
               </g>
               <g class="flow-box flow-box-source">
                 <rect x="20" y="110" width="200" height="70" rx="6" />
                 <text x="120" y="140" class="flow-title">Weather API</text>
-                <text x="120" y="156" class="flow-subtitle">Open-Meteo-shaped, regional</text>
+                <text x="120" y="156" class="flow-subtitle">
+                  Open-Meteo-shaped, regional
+                </text>
               </g>
               <g class="flow-box flow-box-source">
                 <rect x="20" y="200" width="200" height="70" rx="6" />
                 <text x="120" y="230" class="flow-title">Planting map</text>
-                <text x="120" y="246" class="flow-subtitle">bed root depth, mulch, need</text>
+                <text x="120" y="246" class="flow-subtitle">
+                  bed root depth, mulch, need
+                </text>
               </g>
               <g class="flow-box flow-box-source">
                 <rect x="20" y="290" width="200" height="70" rx="6" />
                 <text x="120" y="320" class="flow-title">Observations</text>
-                <text x="120" y="336" class="flow-subtitle">manual field notes</text>
+                <text x="120" y="336" class="flow-subtitle">
+                  manual field notes
+                </text>
               </g>
 
               <!-- contracts -->
               <g class="flow-box flow-box-contract">
                 <rect x="270" y="135" width="150" height="110" rx="6" />
-                <text x="140" y="16" class="flow-tag flow-tag-honest" transform="translate(270,135)">honest seam</text>
+                <text
+                  x="140"
+                  y="16"
+                  class="flow-tag flow-tag-honest"
+                  transform="translate(270,135)"
+                >
+                  honest seam
+                </text>
                 <text x="345" y="185" class="flow-title">Contracts</text>
-                <text x="345" y="203" class="flow-subtitle">3 schemas, frozen</text>
-                <text x="345" y="219" class="flow-subtitle">sensor · derived · briefing</text>
+                <text x="345" y="203" class="flow-subtitle">
+                  3 schemas, frozen
+                </text>
+                <text x="345" y="219" class="flow-subtitle">
+                  sensor · derived · briefing
+                </text>
               </g>
 
               <!-- store -->
               <g class="flow-box flow-box-store">
                 <rect x="470" y="135" width="150" height="110" rx="6" />
-                <text x="140" y="16" class="flow-tag flow-tag-shortcut" transform="translate(470,135)">demo shortcut</text>
+                <text
+                  x="140"
+                  y="16"
+                  class="flow-tag flow-tag-shortcut"
+                  transform="translate(470,135)"
+                >
+                  demo shortcut
+                </text>
                 <text x="545" y="185" class="flow-title">Store</text>
-                <text x="545" y="203" class="flow-subtitle">flat JSON files</text>
-                <text x="545" y="219" class="flow-subtitle">target: K8s + SQLite</text>
+                <text x="545" y="203" class="flow-subtitle">
+                  flat JSON files
+                </text>
+                <text x="545" y="219" class="flow-subtitle">
+                  target: K8s + SQLite
+                </text>
               </g>
 
               <!-- derived -->
               <g class="flow-box flow-box-derived">
                 <rect x="670" y="135" width="150" height="110" rx="6" />
-                <text x="140" y="16" class="flow-tag flow-tag-honest" transform="translate(670,135)">honest</text>
+                <text
+                  x="140"
+                  y="16"
+                  class="flow-tag flow-tag-honest"
+                  transform="translate(670,135)"
+                >
+                  honest
+                </text>
                 <text x="745" y="185" class="flow-title">Derived layer</text>
-                <text x="745" y="203" class="flow-subtitle">Hargreaves ET</text>
-                <text x="745" y="219" class="flow-subtitle">water balance · advice rules</text>
+                <text x="745" y="203" class="flow-subtitle">
+                  Hargreaves ET
+                  <title>ET = evapotranspiration</title>
+                </text>
+                <text x="745" y="219" class="flow-subtitle">
+                  water balance · advice rules
+                </text>
               </g>
 
               <!-- surfaces -->
               <g class="flow-box flow-box-surface">
                 <rect x="870" y="80" width="220" height="80" rx="6" />
                 <text x="980" y="115" class="flow-title">Dashboard</text>
-                <text x="980" y="131" class="flow-subtitle">overview · trends · flow</text>
+                <text x="980" y="131" class="flow-subtitle">
+                  overview · trends · flow
+                </text>
               </g>
               <g class="flow-box flow-box-surface">
                 <rect x="870" y="250" width="220" height="80" rx="6" />
                 <text x="980" y="285" class="flow-title">Weekly briefing</text>
-                <text x="980" y="301" class="flow-subtitle">rendered markdown</text>
+                <text x="980" y="301" class="flow-subtitle">
+                  rendered markdown
+                </text>
               </g>
             </svg>
           </div>
         </div>
       </section>
 
-      <section class="panel" id="panel-briefing" role="tabpanel" aria-labelledby="tab-briefing" hidden>
+      <section
+        class="panel"
+        id="panel-briefing"
+        role="tabpanel"
+        aria-labelledby="tab-briefing"
+        hidden
+      >
         <div class="panel-box briefing" id="briefing-content"></div>
       </section>
     </main>

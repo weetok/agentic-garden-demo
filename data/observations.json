@@ -1,0 +1,14 @@
+[
+  { "date": "2026-07-13", "bed_id": "sfg_beds", "amount_mm": 6.0, "note": "Routine watering, early dry spell" },
+  { "date": "2026-07-16", "bed_id": "tomatillo", "amount_mm": 8.0, "note": "Routine watering" },
+  { "date": "2026-07-20", "bed_id": "courgette", "amount_mm": 10.0, "note": "Watered as heat picked up" },
+  { "date": "2026-07-23", "bed_id": "vegetable_bed", "amount_mm": 8.0, "note": "Watered during dry spell" },
+  { "date": "2026-07-26", "bed_id": "tomatillo", "amount_mm": 12.0, "note": "Deep-watered" },
+  { "date": "2026-07-27", "bed_id": "courgette", "amount_mm": 12.0, "note": "Deep-watered" },
+  { "date": "2026-07-27", "bed_id": "blueberry", "amount_mm": 13.0, "note": "Deep-watered, shallow roots struggling" },
+  { "date": "2026-07-28", "bed_id": "pond_herb_spiral", "amount_mm": 14.0, "note": "Deep-watered" },
+  { "date": "2026-07-29", "bed_id": "tomatillo", "amount_mm": 12.0, "note": "Second deep-water this week" },
+  { "date": "2026-07-29", "bed_id": "tunnel_trellis", "amount_mm": 3.0, "note": "Light top-up" },
+  { "date": "2026-07-30", "bed_id": "courgette", "amount_mm": 12.0, "note": "Second deep-water this week" },
+  { "date": "2026-07-30", "bed_id": "brass_pepper", "amount_mm": 3.0, "note": "Light top-up" }
+]

@@ -57,6 +57,27 @@ dashboard/briefing, with honest-seam / demo-shortcut tags pulled from
 PLAN.md §3's own wording, and looping `animateMotion` pulses per connector.
 
 **Evening 2 complete** — all of blocks 2.1–2.4 done. Verified in a headless
-browser across all four tabs on every block: no console errors. Remaining
-per PLAN.md: §8 accompanying documentation (README, architecture diagrams)
-— not started.
+browser across all four tabs on every block: no console errors.
+
+Post-Evening-2 verification + polish pass: audited the whole build against
+PLAN.md's must-show/won't-show lists and CLAUDE.md's hard rules (contracts
+untouched since block 1.1, no drift between pipeline output and committed
+`docs/data/*`, no secrets, no Americanisms) — all passed. Fixed from that
+pass: bed-map legend was missing an infrastructure swatch; the Flow SVG
+was illegible on narrow mobile viewports (now scrolls horizontally instead
+of shrinking); bed-map SVG and Trends canvases had no `aria-label`; redundant
+`.gitkeep`s removed from `contracts/` and `pipeline/` now that both have
+real files. Also, per user feedback: bed map beds are now numbered with a
+key list below (previously identifiable only via hover title, unusable on
+mobile/touch), and every bed rect gets a uniform inset so adjacent beds no
+longer touch edge-to-edge. Trends tab gained two more views: per-bed water
+balance (bar, worst first) and hourly conditions (temp/humidity/wind/rain
+over the trailing 7 days) — the latter reads from a new `docs/data/hourly.json`,
+a verbatim windowed copy of the raw sensor payload emitted by `derive.py`,
+same non-contract pattern as `planting_map.json` (not one of the three
+frozen schemas).
+
+Remaining per PLAN.md: §8 accompanying documentation (README, architecture
+diagrams) — not started. GitHub Pages live-URL status not independently
+verified from this environment (no network/`gh` access) — user confirmed
+it's up.

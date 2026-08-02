@@ -171,13 +171,13 @@
     },
     {
       "bed_id": "courgette",
-      "stress": "act",
-      "water_balance_mm": -28.0
+      "stress": "ok",
+      "water_balance_mm": -4.0
     },
     {
       "bed_id": "pond_herb_spiral",
-      "stress": "act",
-      "water_balance_mm": -28.0
+      "stress": "watch",
+      "water_balance_mm": -14.0
     },
     {
       "bed_id": "apple_tree_guild",
@@ -206,8 +206,8 @@
     },
     {
       "bed_id": "tunnel_trellis",
-      "stress": "act",
-      "water_balance_mm": -16.7
+      "stress": "watch",
+      "water_balance_mm": -13.7
     },
     {
       "bed_id": "north_strip",
@@ -216,18 +216,18 @@
     },
     {
       "bed_id": "brass_pepper",
-      "stress": "act",
-      "water_balance_mm": -16.7
+      "stress": "watch",
+      "water_balance_mm": -13.7
     },
     {
       "bed_id": "tomatillo",
-      "stress": "act",
-      "water_balance_mm": -28.0
+      "stress": "ok",
+      "water_balance_mm": -4.0
     },
     {
       "bed_id": "blueberry",
-      "stress": "act",
-      "water_balance_mm": -26.7
+      "stress": "watch",
+      "water_balance_mm": -13.7
     },
     {
       "bed_id": "dry_bean",
@@ -236,32 +236,8 @@
     }
   ],
   "advice": {
-    "headline": "Deep-water Courgette, Pond & Herb Spiral, Tomatillo and 7 other beds tonight, then mulch where unmulched. Leave Apple Tree Guild alone.",
+    "headline": "Deep-water Cover crops, SFG Beds, Vegetable Bed and 1 other bed tonight, then mulch where unmulched. Leave Apple Tree Guild alone.",
     "actions": [
-      {
-        "bed_id": "courgette",
-        "action": "deep_water_and_mulch"
-      },
-      {
-        "bed_id": "pond_herb_spiral",
-        "action": "deep_water_and_mulch"
-      },
-      {
-        "bed_id": "tomatillo",
-        "action": "deep_water_and_mulch"
-      },
-      {
-        "bed_id": "blueberry",
-        "action": "deep_water"
-      },
-      {
-        "bed_id": "tunnel_trellis",
-        "action": "deep_water"
-      },
-      {
-        "bed_id": "brass_pepper",
-        "action": "deep_water"
-      },
       {
         "bed_id": "cover_crops",
         "action": "deep_water_and_mulch"
@@ -286,10 +262,11 @@
     "why": [
       "Site rain 2.0 mm vs 10.0 mm recorded regionally over the same 7 days",
       "ET 33.3 mm outpaced rainfall over the same period",
-      "Courgette: high water need, unmulched, medium-rooted",
-      "Pond & Herb Spiral: high water need, unmulched, medium-rooted",
-      "Tomatillo: high water need, unmulched, medium-rooted",
-      "7 further beds also flagged for watering \u2014 see actions",
+      "Plus 81.0 mm applied via manual watering across 6 beds this week",
+      "Cover crops: low water need, unmulched, shallow-rooted",
+      "SFG Beds: medium water need, unmulched, medium-rooted",
+      "Vegetable Bed: medium water need, unmulched, medium-rooted",
+      "1 further bed also flagged for watering \u2014 see actions",
       "Apple Tree Guild: deep-rooted, mulched \u2014 buffered against the deficit"
     ]
   }

@@ -35,6 +35,8 @@ ACT_FLOOR_MM = -15.0
 
 ANTHROPIC_MODEL = "claude-haiku-4-5-20251001"
 
+HOURLY_WINDOW_HOURS = 7 * 24  # trailing week, for the Trends tab's hourly-conditions charts
+
 
 def hargreaves_et0(tmax, tmin, tmean, day_of_year, lat_deg=LAT_DEG):
     """Hargreaves-Samani reference ET0, mm/day. CLAUDE.md hard rule 3: this
@@ -111,14 +113,26 @@ def build_outlook(weather, period_end):
     }
 
 
-def compute_beds(planting_map, rain_7d, et_7d):
+def watering_by_bed(observations, start_date, end_date):
+    """Sum manual watering per bed within an inclusive date window. Watering
+    is a targeted, per-bed input — distinct from the site rain gauge — so it
+    only ever adjusts individual beds' water balance, never daily_series."""
+    totals = {}
+    for obs in observations:
+        if start_date <= date.fromisoformat(obs["date"]) <= end_date:
+            totals[obs["bed_id"]] = totals.get(obs["bed_id"], 0.0) + obs["amount_mm"]
+    return totals
+
+
+def compute_beds(planting_map, rain_7d, et_7d, watered_7d):
     beds = []
     for bed in planting_map["beds"]:
         factor = WATER_NEED_FACTOR[bed["water_need"]]
         mulch_factor = MULCH_ET_FACTOR if bed["mulched"] else 1.0
         effective_et = et_7d * factor * mulch_factor
         reserve = ROOT_RESERVE_MM[bed["root_depth"]]
-        balance = round(reserve + (rain_7d - effective_et), 1)
+        watered = watered_7d.get(bed["id"], 0.0)
+        balance = round(reserve + (rain_7d + watered - effective_et), 1)
         if balance >= WATCH_FLOOR_MM:
             stress = "ok"
         elif balance >= ACT_FLOOR_MM:
@@ -128,7 +142,7 @@ def compute_beds(planting_map, rain_7d, et_7d):
         beds.append({
             "bed_id": bed["id"], "name": bed["name"], "root_depth": bed["root_depth"],
             "water_need": bed["water_need"], "mulched": bed["mulched"],
-            "stress": stress, "water_balance_mm": balance,
+            "stress": stress, "water_balance_mm": balance, "watered_7d_mm": watered,
         })
     return beds
 
@@ -165,6 +179,10 @@ def build_advice(beds, rain_7d, et_7d, regional_7d):
         f"Site rain {rain_7d} mm vs {regional_7d} mm recorded regionally over the same 7 days",
         f"ET {et_7d} mm outpaced rainfall over the same period",
     ]
+    watered_beds = [b for b in beds if b["watered_7d_mm"] > 0]
+    if watered_beds:
+        total_watered = round(sum(b["watered_7d_mm"] for b in watered_beds), 1)
+        why.append(f"Plus {total_watered} mm applied via manual watering across {len(watered_beds)} beds this week")
     for b in named:
         mulch_state = "mulched" if b["mulched"] else "unmulched"
         why.append(f"{b['name']}: {b['water_need']} water need, {mulch_state}, {b['root_depth']}-rooted")
@@ -216,7 +234,7 @@ def phrase_with_llm(headline, why):
     return headline, why
 
 
-def build_derived(sensor_series, weather, planting_map):
+def build_derived(sensor_series, weather, planting_map, observations):
     site_daily = aggregate_site_daily(sensor_series)
     daily_series = build_daily_series(site_daily, weather)
     period_start = date.fromisoformat(daily_series[0]["date"])
@@ -236,7 +254,8 @@ def build_derived(sensor_series, weather, planting_map):
         "et_7d_mm": et_7d,
     }
 
-    beds = compute_beds(planting_map, rain_7d, et_7d)
+    watered_7d = watering_by_bed(observations, date.fromisoformat(last_7[0]["date"]), period_end)
+    beds = compute_beds(planting_map, rain_7d, et_7d, watered_7d)
     headline, actions, why = build_advice(beds, rain_7d, et_7d, regional_7d)
     headline, why = phrase_with_llm(headline, why)
 
@@ -277,7 +296,7 @@ def build_briefing(derived):
     this_week = (
         f"Over {human_date(series[-7]['date'])}–{human_date(p['end'])}, the site logged {hm['rain_7d_mm']} mm of rain "
         f"against {derived['_regional_7d']} mm recorded regionally over the same days — the site ran markedly drier "
-        f"than the surrounding area. Evapotranspiration reached {hm['et_7d_mm']} mm over the same seven days, "
+        f"than the surrounding area. ET reached {hm['et_7d_mm']} mm over the same seven days, "
         f"outpacing rainfall as heat and wind pushed water demand up. Across the full three-week record ({week_trend}), "
         + ("the deficit widened week on week to this week's shortfall." if widened else
            "this week's shortfall was the sharpest of the three.")
@@ -285,7 +304,7 @@ def build_briefing(derived):
     outlook_text = (
         f"The week ahead ({human_date(outlook['period']['start'])}–{human_date(outlook['period']['end'])}) is forecast — "
         f"via the regional weather service, not site sensors — to bring {outlook['forecast_rain_mm']} mm of rain against "
-        f"{outlook['forecast_et_mm']} mm of estimated evapotranspiration. "
+        f"{outlook['forecast_et_mm']} mm of estimated ET. "
         + ("Given the site has run drier than the region this period, actual conditions may be drier still."
            if outlook['forecast_et_mm'] > outlook['forecast_rain_mm'] else
            "Rain is expected to help close the deficit.")
@@ -342,17 +361,30 @@ def main():
     sensor_series = load_json(DATA / "sensor_series.json")
     weather = load_json(DATA / "weather_regional.json")
     planting_map = load_json(DOCS_DATA / "planting_map.json")
+    observations = load_json(DATA / "observations.json")
 
-    derived = build_derived(sensor_series, weather, planting_map)
+    derived = build_derived(sensor_series, weather, planting_map, observations)
     briefing_md = build_briefing(derived)
 
     derived_out = {k: v for k, v in derived.items() if not k.startswith("_")}
     (DOCS_DATA / "derived.json").write_text(json.dumps(derived_out, indent=2) + "\n")
     (DOCS_DATA / "briefing.md").write_text(briefing_md)
 
+    # Verbatim trailing-week slice of the raw sensor payload — not a derived
+    # value, just a windowed copy for the Trends tab's hourly-conditions
+    # charts. Not one of the three frozen contracts (like planting_map.json).
+    hourly_out = sensor_series[-HOURLY_WINDOW_HOURS:]
+    (DOCS_DATA / "hourly.json").write_text(json.dumps(hourly_out, indent=2) + "\n")
+
+    # Straight pass-through of the manual watering log — the "Observations"
+    # mock source. Not a contract; the Trends chart overlays it for texture,
+    # and it already feeds compute_beds() above via watering_by_bed().
+    (DOCS_DATA / "observations.json").write_text(json.dumps(observations, indent=2) + "\n")
+
     print(f"beds: {[(b['bed_id'], b['stress']) for b in derived['_beds_full']]}")
     print(f"headline: {derived['advice']['headline']}")
-    print("wrote docs/data/derived.json and docs/data/briefing.md")
+    print(f"wrote docs/data/derived.json, docs/data/briefing.md, docs/data/hourly.json ({len(hourly_out)} readings), "
+          f"docs/data/observations.json ({len(observations)} events)")
 
 
 if __name__ == "__main__":
